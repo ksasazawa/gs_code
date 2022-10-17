@@ -43,6 +43,10 @@ h2{
     color: #fff;
     font-size: 1.8rem;
     font-weight: bold;
+    transition: all 0.05s ease 0s;
+}
+.btn:hover {
+	transform: translateY(0.5000em);
 }
 
 /* Header */
@@ -243,4 +247,8 @@ footer{
       100% {
       transform: translateX(0);
       }
+  }
+
+  @media screen and (max-width:640px){
+      
   }
