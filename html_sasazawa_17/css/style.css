@@ -81,11 +81,13 @@ header{
 }
 .header_img_text_1{
     font-size: 40px;
+    font-size: 3vw;
     font-weight: bold;
     color: #fff;
 }
 .header_img_text_2{
     font-size: 25px;
+    font-size: 2vw;
     color: #fff;
 }
 
@@ -250,5 +252,5 @@ footer{
   }
 
   @media screen and (max-width:640px){
-      
+
   }
