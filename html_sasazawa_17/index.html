@@ -278,7 +278,7 @@
               </td>
             </tr>
           </table>
-          <a href="#" target="_blank" class="btn">送信</a>
+          <a href="#" target="_blank" id="submit" class="btn">送信</a>
         </form>
       </div>
     </section>
@@ -290,6 +290,12 @@
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    const name = document.querySelector(".contact_name");
+    document.querySelector("#submit").onclick = function(){
+      alert(`${name.value}さん、お問合せありがとうございます！！`);
+    };
+  </script>
 </body>
 
 </html>
