@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/green_peace.js"></script>
 </head>
 <body>
     <header>
@@ -22,6 +23,7 @@
     <main> 
         <section>
             <h2 class="selection">闘う相手を選択してください</h2>
+            <!-- 敵選択 -->
             <form action="#" action="POST" name="enemy_selection">
                 <ul class="enemy_list">
                     <li class="enemy">
@@ -43,34 +45,8 @@
                 </ul>
                 <input type="button" onclick="battle()" value="Battle!!" class="btn">
             </form>
-            <p class="selected"></p>
-            <script>
-                function battle(){
-                    let enemy = "";
-                    const enemies = document.enemy_selection.kind;
-                    for (let i = 0; i < enemies.length; i++) {
-                        if (enemies[i].checked) {
-                          enemy = enemies[i].value;
-                          break;
-                        }
-                    }
-                    document.querySelector(".selected").innerHTML = enemy;
-                    window.location.href = `green_peace_${enemy}.html`;
-                }
-            </script>
-
-        </section>
-        <section>
-            
-        </section>
-        <section>
-            
-        </section>
-
     </main>
 
-    <footer>
-
-    </footer>
+    <footer></footer>
 </body>
 </html>

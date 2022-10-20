@@ -1,5 +1,6 @@
 @charset "utf-8";
 
+/* 全体 */
 html{
     font-size: 62.5%;
     color: #222222;
@@ -30,8 +31,7 @@ body{
     color: #ffeeee;
 }
 
-/* main */
-
+/* ホーム画面 */
 .selection{
     font-size: 3rem;
     margin: 80px 0 0;
@@ -59,7 +59,7 @@ body{
 	transform: translateY(0.5000em);
 }
 
-/* バトルページ */
+/* バトル画面 */
 .list{
     display: flex;
 }
@@ -89,7 +89,7 @@ body{
     cursor: pointer;
 	transform: translateY(0.5000em);
 }
-#enemy_hand{
+.enemy_hand{
     margin: auto;
 }
 #echo{
