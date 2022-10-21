@@ -11,84 +11,135 @@ function battle(){
     window.location.href = "green_peace_battle.html" + "?" + enemy ;
 }
 
-// 【バトル画面】敵キャラ設定
+let seconds = 0;
+// 【バトル画面】キャラ設定
 function init(){
     const param = location.search;
     if(param=="?zu"){
         document.querySelector("#enemy_name").innerHTML = "ズ・ゴオマ・グ";
         document.querySelector("#enemy_photo").src = "./img/ズ・ゴオマ・グ_2.jpeg";
+        seconds = 3;
     }
     else if(param=="?me"){
         document.querySelector("#enemy_name").innerHTML = "メ・ガルメ・レ";
         document.querySelector("#enemy_photo").src = "./img/メ・ガルメ・レ_2.jpeg";
+        seconds = 2;
     }
     else if(param=="?go"){
         document.querySelector("#enemy_name").innerHTML = "ゴ・ガドル・バ";
         document.querySelector("#enemy_photo").src = "./img/ゴ・ガドル・バ_2.jpeg";
+        seconds = 1;
     }
     else if(param=="?n"){
         document.querySelector("#enemy_name").innerHTML = "ン・ダグバ・ゼバ";
         document.querySelector("#enemy_photo").src = "./img/ン・ダグバ・ゼバ_2.jpeg";
+        document.querySelector("#your_photo").src = "./img/アルティメット.jpeg";
+        document.querySelector("html").style.backgroundColor = "white";
+        seconds = 0.5;
+        // document.querySelector("html").style.backgroundImage = "./img/snow.jpeg";
     }
 };
 
 // 【バトル画面】じゃんけん
+let cnt = 0;
+let flag = false;
+
 function janken(your_hand){
-    const e = Math.ceil(Math.random()*3);
-    console.log(`敵の手は${e}。自分の手は${your_hand}`);
+    // 初期化
     let enemy_hand = "";
     let conclusion = "";
-        // 相手がパーの時
-        if(e == 3){
+    document.querySelector("#enemy_rinrin").innerHTML = "";
+    document.querySelector("#your_rinrin").innerHTML = "";
+    document.querySelector("#gu").style.opacity = 0.2;
+    document.querySelector("#cho").style.opacity = 0.2;
+    document.querySelector("#pa").style.opacity = 0.2;
+    // 自分の手を固定
+    document.querySelector("#"+your_hand).style.opacity = 0.9;
+    // 敵の手を設定
+    const e = Math.ceil(Math.random()*3);
+    switch(e){
+        case 3:
             enemy_hand = "pa";
-            if(your_hand == "gu"){
-                conclusion = "lose";
-                document.querySelector("#echo").innerHTML = "You Lose";
-            }
-            else if(your_hand == "cho"){
-                conclusion = "win";
-                document.querySelector("#echo").innerHTML = "You Win";
-            }
-            else{
-                conclusion = "draw";
-                document.querySelector("#echo").innerHTML = "Draw";
-            }
-            document.querySelector(".enemy_hand").innerHTML = `<img class = "your_hand" src="img/パー.jpg" alt="パー">`;
-        }
-        // 相手がチョキの時
-        else if(e == 2){
+            document.querySelector(".enemy_hand").innerHTML = `<img class = "enemy_hand" src="img/パー.jpg" alt="パー">`;
+            break;
+        case 2:
             enemy_hand = "cho";
-            if(your_hand == "gu"){
-                conclusion = "win";
-                document.querySelector("#echo").innerHTML = "You Win";
-            }
-            else if(your_hand == "cho"){
-                conclusion = "draw";
-                document.querySelector("#echo").innerHTML = "Draw";
-            }
-            else{
-                conclusion = "lose";
-                document.querySelector("#echo").innerHTML = "You Lose";
-            }
-            document.querySelector(".enemy_hand").innerHTML = `<img class = "your_hand" src="img/チョキ.jpg" alt="チョキ">`;
-        }
-        // 相手がグーの時
-        else if(e == 1){
+            document.querySelector(".enemy_hand").innerHTML = `<img class = "enemy_hand" src="img/チョキ.jpg" alt="チョキ">`;
+            break;
+        case 1:
             enemy_hand = "gu";
-            if(your_hand == "gu"){
-                conclusion = "draw";
-                document.querySelector("#echo").innerHTML = "Draw";
+            document.querySelector(".enemy_hand").innerHTML = `<img class = "enemy_hand" src="img/グー.jpg" alt="グー">`;
+            break;
+    };
+    console.log(`${cnt}回目。敵の手は${enemy_hand}。自分の手は${your_hand}`);
+
+    // あいこの時
+    if(enemy_hand==your_hand){
+        conclusion = "draw";
+        document.querySelector("#echo").innerHTML = conclusion;
+        // １回以上勝敗がついている場合
+        if(cnt>0){
+            // Donnが押されたらフラグ値をTrueにする。
+            document.querySelector("#donn").addEventListener('click', function() {
+                flag = true;
+                console.log(flag);
+            });
+            // 一定期間でボタンを消す。
+            function closeButton() {
+                document.querySelector("#donn").style.display = "none"; // ボタンを消す
+                clearTimeout( timerId ); // タイマーを終了
+             };
+            document.querySelector("#donn").style.display = "block";
+            timerId = setTimeout(closeButton , seconds*1000);
+            // ５秒プログラム停止
+            // sleep関数の定義
+            function sleep(waitSec, callbackFunc) {
+                // 経過時間（秒）
+                var spanedSec = 0;
+                // 1秒間隔で無名関数を実行
+                var id = setInterval(function () {                              
+                    spanedSec++;           
+                    // 経過時間 >= 待機時間の場合、待機終了。
+                    if (spanedSec >= waitSec) {           
+                        // タイマー停止
+                        clearInterval(id);           
+                        // 完了時、コールバック関数を実行
+                        if (callbackFunc) callbackFunc();
+                    }
+                }, 1000);           
             }
-            else if(your_hand == "cho"){
-                conclusion = "lose";
-                document.querySelector("#echo").innerHTML = "You Lose";
-            }
-            else{
-                conclusion = "win";
-                document.querySelector("#echo").innerHTML = "You Win";
-            }
-            document.querySelector(".enemy_hand").innerHTML = `<img class = "your_hand" src="img/グー.jpg" alt="グー">`;
+            // sleep関数の実行          
+            sleep(seconds, function () {           
+                console.log(`${seconds}秒経過しました！`);
+                // 勝ちパターン
+                if(flag==true){
+                    console.log("勝利");
+                    document.querySelector("#echo").innerHTML = "大勝利！！";
+                }
+                // 負けパターン
+                else{
+                    console.log("敗北");
+                    document.querySelector("#echo").innerHTML = "敗北、、、";
+                };         
+            });
         };
+    }
+    // 勝敗がついた時
+    else{
+        cnt += 1;
+        // 自分が負けの時
+        if((enemy_hand=="gu" && your_hand=="cho") || (enemy_hand=="cho" && your_hand=="pa") || (enemy_hand=="pa" && your_hand=="gu")){
+            conclusion = "lose";
+            document.querySelector("#echo").innerHTML = conclusion;
+            document.querySelector("#enemy_rinrin").innerHTML = `${enemy_hand}rin,${enemy_hand}rin!`;
+        }
+        // 自分が勝ちの時
+        else if((enemy_hand=="gu" && your_hand=="pa") || (enemy_hand=="cho" && your_hand=="gu") || (enemy_hand=="pa" && your_hand=="cho")){
+            conclusion = "win";
+            document.querySelector("#echo").innerHTML = conclusion;
+            document.querySelector("#your_rinrin").innerHTML = `${your_hand}rin,${your_hand}rin!`;
+        }
+    };
 };
 
 

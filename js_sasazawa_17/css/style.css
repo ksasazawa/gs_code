@@ -69,6 +69,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    position: relative;
 }
 .item_text{
     font-size: 2rem;
@@ -81,16 +82,33 @@ body{
     height: 150px;
     margin: 40px auto 0;
     text-align: center;
-    opacity: 0.3;
+    opacity: 0.2;
     transition: all 0.05s ease 0s;
 }
 .your_hand:hover {
-    opacity: 0.5;
+    opacity: 0.9;
     cursor: pointer;
 	transform: translateY(0.5000em);
 }
 .enemy_hand{
+    width: 150px;
+    height: 150px;
+    text-align: center;
     margin: auto;
+}
+#enemy_hand{
+    width: 200px;
+    height: 400px;
+}
+.rinrin{
+    position: absolute;
+    top: 0%;
+    right: -10%;
+    font-size: 2.5rem;
+    font-weight: bold;
+    background-color: aquamarine;
+    border-radius: 10%;
+    transform: rotate(20deg);
 }
 #echo{
     font-size: 3rem;
@@ -100,4 +118,20 @@ body{
     top: 50%;
     left: 50%;
     transform: translate3d(-50%, -100%, 0);
+}
+#donn{
+    display: none;
+    width: 100px;
+    height: 40px;
+    border-radius: 10%;
+    font-size: 3rem;
+    font-weight: bold;
+    color: green;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate3d(-50%, -100%, 0);
+}
+#donn:hover {
+    cursor: pointer;
 }
