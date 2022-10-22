@@ -4,6 +4,7 @@
 html{
     font-size: 62.5%;
     color: #222222;
+    background-size:  cover; 
     background-color: #f0f9e0;
 }
 body{
@@ -82,8 +83,10 @@ body{
     height: 150px;
     margin: 40px auto 0;
     text-align: center;
-    opacity: 0.2;
+    opacity: 0.3;
     transition: all 0.05s ease 0s;
+    /* position: fixed;
+    left: 395px; */
 }
 .your_hand:hover {
     opacity: 0.9;
@@ -111,7 +114,7 @@ body{
     transform: rotate(20deg);
 }
 #echo{
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: bold;
     color: red;
     position: absolute;
@@ -121,12 +124,13 @@ body{
 }
 #donn{
     display: none;
-    width: 100px;
-    height: 40px;
+    width: 150px;
+    height: 60px;
     border-radius: 10%;
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: bold;
-    color: green;
+    background-color: green;
+    color: white;
     position: absolute;
     top: 70%;
     left: 50%;
